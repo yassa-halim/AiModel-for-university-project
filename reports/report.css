@@ -1,0 +1,594 @@
+/* VulnCraft Professional Security Report - Enterprise Edition v2.0 */
+/* Optimized for Executive Readability & PDF Export */
+
+/* ==================== FOUNDATIONAL STYLES ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b; /* Slate 800 - Darker for better readability */
+    line-height: 1.7;
+    padding: 50px 70px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 10.5pt;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== DOCUMENT HEADER ==================== */
+
+h1 {
+    color: #0f172a; /* Slate 900 */
+    font-size: 28pt;
+    font-weight: 800;
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 50px;
+    letter-spacing: -0.8px;
+    text-align: left;
+    position: relative;
+    text-transform: uppercase;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #dc2626 0%, #ea580c 50%, #d97706 100%);
+}
+
+/* ==================== SECTION HEADERS ==================== */
+
+h2 {
+    color: #0f172a; /* Slate 900 */
+    font-size: 17pt;
+    font-weight: 700;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    padding: 12px 0 12px 20px;
+    border-left: 5px solid #3b82f6; /* Blue accent */
+    background: linear-gradient(to right, #eff6ff 0%, transparent 100%);
+    page-break-after: avoid;
+    letter-spacing: -0.3px;
+}
+
+h2::before {
+    content: '§ ';
+    color: #3b82f6;
+    font-weight: 800;
+    margin-right: 8px;
+}
+
+/* ==================== SUB-SECTION HEADERS ==================== */
+
+h3 {
+    color: #334155; /* Slate 700 */
+    font-size: 13.5pt;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 6px;
+    page-break-after: avoid;
+}
+
+h4 {
+    color: #475569; /* Slate 600 */
+    font-size: 11.5pt;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 9.5pt;
+}
+
+/* ==================== PROFESSIONAL TABLES ==================== */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 30px 0;
+    font-size: 9.5pt;
+    border: 1px solid #cbd5e1;
+    page-break-inside: avoid;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Table Header Styling */
+thead {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+}
+
+thead tr {
+    border-bottom: none;
+}
+
+th {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 1px;
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 2px solid #475569;
+    white-space: nowrap;
+}
+
+/* Table Body Styling */
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+td {
+    padding: 12px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+    color: #334155;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* First column emphasis */
+td:first-child {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* ==================== SEVERITY INDICATORS ==================== */
+
+/* Critical Severity Badge */
+.severity-critical,
+td:contains('🔴'),
+td:contains('Critical'),
+span.critical {
+    color: #ffffff !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    padding: 4px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+/* High Severity Badge */
+.severity-high,
+td:contains('🟠'),
+td:contains('High'),
+span.high {
+    color: #ffffff !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    padding: 4px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(234, 88, 12, 0.3);
+}
+
+/* Medium Severity Badge */
+.severity-medium,
+td:contains('🟡'),
+td:contains('Medium'),
+span.medium {
+    color: #ffffff !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    padding: 4px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+/* Low Severity Badge */
+.severity-low,
+td:contains('🟢'),
+td:contains('Low'),
+span.low {
+    color: #ffffff !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    padding: 4px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+/* ==================== CODE BLOCKS & TECHNICAL CONTENT ==================== */
+
+pre {
+    background-color: #0f172a; /* Dark theme for code */
+    border: 1px solid #1e293b;
+    border-left: 4px solid #3b82f6;
+    border-radius: 6px;
+    padding: 18px;
+    overflow-x: auto;
+    font-family: "SF Mono", "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 9pt;
+    color: #e2e8f0;
+    margin: 25px 0;
+    line-height: 1.5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+code {
+    font-family: "SF Mono", "Consolas", "Monaco", "Courier New", monospace;
+    background-color: #f1f5f9;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+    color: #dc2626;
+    border: 1px solid #e2e8f0;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #e2e8f0;
+    border: none;
+}
+
+/* Syntax highlighting hints */
+pre .keyword { color: #f472b6; }
+pre .string { color: #34d399; }
+pre .comment { color: #64748b; font-style: italic; }
+pre .function { color: #60a5fa; }
+
+/* ==================== TEXT & PARAGRAPH STYLING ==================== */
+
+p {
+    margin-bottom: 1.2em;
+    text-align: justify;
+    color: #334155;
+}
+
+strong, b {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+em, i {
+    font-style: italic;
+    color: #475569;
+}
+
+/* ==================== ALERT BOXES & CALLOUTS ==================== */
+
+blockquote {
+    border-left: 5px solid #3b82f6;
+    background: linear-gradient(to right, #eff6ff 0%, #dbeafe 100%);
+    padding: 18px 20px;
+    margin: 25px 0;
+    color: #1e40af;
+    font-style: normal;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+blockquote::before {
+    content: 'ℹ️ NOTE: ';
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Warning Box */
+.warning {
+    border-left: 5px solid #f59e0b;
+    background: linear-gradient(to right, #fffbeb 0%, #fef3c7 100%);
+    padding: 18px 20px;
+    margin: 25px 0;
+    color: #92400e;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Critical Alert Box */
+.alert-critical {
+    border-left: 5px solid #dc2626;
+    background: linear-gradient(to right, #fef2f2 0%, #fee2e2 100%);
+    padding: 18px 20px;
+    margin: 25px 0;
+    color: #991b1b;
+    border-radius: 0 6px 6px 0;
+    font-weight: 600;
+}
+
+/* ==================== LISTS ==================== */
+
+ul, ol {
+    margin: 18px 0;
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 8px;
+    padding-left: 8px;
+    color: #334155;
+}
+
+ul li::marker {
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+ol li::marker {
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+/* Nested lists */
+ul ul, ol ul, ul ol, ol ol {
+    margin: 8px 0;
+}
+
+/* ==================== HORIZONTAL RULES ==================== */
+
+hr {
+    border: 0;
+    border-top: 2px solid #e2e8f0;
+    margin: 50px 0;
+    height: 0;
+    background: none;
+    position: relative;
+}
+
+hr::after {
+    content: '⬥';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    padding: 0 15px;
+    color: #cbd5e1;
+    font-size: 14pt;
+}
+
+/* ==================== DOCUMENT FOOTER ==================== */
+
+.report-footer,
+div[align="center"] {
+    margin-top: 100px;
+    padding-top: 30px;
+    border-top: 2px solid #cbd5e1;
+    color: #64748b;
+    font-size: 9pt;
+    text-align: center;
+    background: linear-gradient(to top, #f8fafc 0%, transparent 100%);
+    padding-bottom: 20px;
+}
+
+.report-footer strong,
+div[align="center"] strong {
+    color: #0f172a;
+    font-size: 11pt;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.report-footer em,
+div[align="center"] em {
+    color: #64748b;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+    font-size: 8.5pt;
+}
+
+/* ==================== LINKS ==================== */
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease;
+}
+
+a:hover {
+    border-bottom: 1px solid #3b82f6;
+}
+
+/* ==================== SPECIAL ELEMENTS ==================== */
+
+/* Status Badges */
+.status-open {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-fixed {
+    background-color: #f0fdf4;
+    color: #15803d;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Priority Indicators */
+.priority-p0 {
+    color: #dc2626;
+    font-weight: 800;
+    font-size: 10pt;
+}
+
+.priority-p1 {
+    color: #ea580c;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.priority-p2 {
+    color: #f59e0b;
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+.priority-p3 {
+    color: #10b981;
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+/* CVSS Score Display */
+.cvss-score {
+    font-family: "SF Mono", "Consolas", monospace;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: #ffffff;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 11pt;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== PRINT OPTIMIZATION ==================== */
+
+@media print {
+    body {
+        padding: 20px 30px;
+        font-size: 9pt;
+        background: #ffffff;
+        line-height: 1.5;
+    }
+    
+    h1 {
+        font-size: 22pt;
+        color: #000;
+        page-break-after: avoid;
+    }
+    
+    h2 {
+        font-size: 15pt;
+        page-break-after: avoid;
+        background: none;
+        border-left: 3px solid #000;
+    }
+    
+    h2::before {
+        color: #000;
+    }
+    
+    h3 {
+        font-size: 12pt;
+        page-break-after: avoid;
+    }
+    
+    table {
+        page-break-inside: auto;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    thead {
+        display: table-header-group;
+        background: #f0f0f0 !important;
+        color: #000 !important;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    
+    td, th {
+        border: 1px solid #ccc;
+    }
+    
+    pre, blockquote {
+        page-break-inside: avoid;
+        border: 1px solid #000;
+        background: #f9f9f9 !important;
+    }
+    
+    pre {
+        color: #000 !important;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+    
+    /* Hide decorative elements in print */
+    h1::after, hr::after {
+        display: none;
+    }
+    
+    /* Force severity badges to be visible */
+    .severity-critical, .severity-high, .severity-medium, .severity-low {
+        border: 2px solid #000 !important;
+        color: #000 !important;
+        background: #fff !important;
+        font-weight: 800 !important;
+    }
+}
+
+/* ==================== PAGE BREAK CONTROLS ==================== */
+
+.page-break-before {
+    page-break-before: always;
+}
+
+.page-break-after {
+    page-break-after: always;
+}
+
+.no-break {
+    page-break-inside: avoid;
+}
