@@ -11,61 +11,75 @@ exports.generateReportContent = async (targetUrl, cleanedData) => {
     const currentTask = async () => {
     
     // 1. هندسة الأوامر (نسخة المقال الاحترافي)
+    const today = new Date().toISOString().split('T')[0];
     const prompt = REPORT_PROMPT
         .replace('{{DATA}}', JSON.stringify(cleanedData, null, 2))
         .replace('{{TARGET_URL}}', targetUrl)
-        .replace('{{DATE}}', new Date().toISOString().split('T')[0]);
+        .replace('{{DATE}}', today)
+        .replace('{{END_DATE}}', today)
+        .replace('{{TIMESTAMP}}', Date.now().toString());
 
     try {
-        if (logger) logger.info(`🤖 Generating Professional Article using Hybrid Mode for: ${targetUrl}`);
+        if (logger) logger.info(`🤖 Generating Professional Security Report (Balanced Mode) for: ${targetUrl}`);
+        const startTime = Date.now();
 
-        // حساب تقريبي لحجم الداتا عشان لو كبيرة ينبهك في اللوج
+        // حساب تقريبي لحجم الداتا
         const dataStr = JSON.stringify(cleanedData);
         if (dataStr.length > 10000) if (logger) logger.warn("⚠️ Heavy Input Data: Processing might take extra time.");
 
         const response = await axios.post('http://localhost:11434/api/generate', {
-            model: "llama3.1", 
+            model: "llama3.1:8b-instruct-q4_0", 
             prompt: prompt,
             stream: false,
             
-            // 🔥 إعدادات المعالجة الهجينة (Hybrid CPU/GPU)
+            // 🎯 إعدادات متوازنة للتحليل الأمني الاحترافي
+            // الهدف: تقرير مفصّل وشامل مع سرعة معقولة
             options: { 
-                // 1. الذاكرة (Context)
-                // 🔥 تقليل الذاكرة لزيادة السرعة (4096 كافية جداً مع البيانات المنظفة)
-                num_ctx: 4096,
+                // 1. 📊 الذاكرة (كافية لتحليل ثغرات متعددة)
+                num_ctx: 2048,         // ⚡ مناسبة لتحليل 3-5 ثغرات بتفصيل
                 
-                // 2. توزيع الحمل (The Magic Number)
-                // تعديل خاص لـ 4GB VRAM:
-                // تم تقليل الطبقات إلى 8 فقط لتجنب امتلاء ذاكرة الفيديو (VRAM Crash)
-                // هذا سيجعل المعالج (CPU) يتحمل الجزء الأكبر، مما قد يبطئ التوليد قليلاً لكنه يضمن العمل باستقرار
-                num_gpu: 14, 
+                // 2. 🔥 GPU: توازن بين الأداء والاستقرار
+                num_gpu: 18,           // ⚡ 18 طبقة = جودة عالية مع استقرار
                 
-                // 3. إعدادات جودة الكتابة
-                temperature: 0.2,      // تقليل الحرارة لضمان الالتزام بالقالب بدقة
-                top_p: 0.9, 
-                repeat_penalty: 1.1,   // عشان ميكررش الكلام
+                // 3. 🎯 إعدادات الجودة (مُحسّنة للتقارير الأمنية)
+                temperature: 0.2,      // منخفضة للدقة والالتزام بالقالب
+                top_p: 0.9,            // نطاق واسع للتعبيرات الفنية
+                top_k: 50,             // توازن بين التنوع والدقة
+                repeat_penalty: 1.2,   // منع التكرار في التحليل
                 
-                // 4. تحسين الأداء
-                num_thread: 6,         // استغل انوية البروسيسور (ممكن تخليها 6 أو 8 حسب جهازك)
-                num_predict: -1        // سيبه يكتب لحد ما يخلص فكرته
+                // 4. 📝 حد الكلمات (مرن للتقارير المفصلة)
+                num_thread: 4,         
+                num_predict: 3500,     // ⚡ كافي لتحليل 5-7 ثغرات بتفصيل كامل
+                
+                // 5. 🔥 إعدادات الأداء المتوازنة
+                num_batch: 512,        // توازن بين السرعة واستهلاك VRAM
+                use_mmap: true,        
+                use_mlock: false,      
+                num_keep: 6,           // الاحتفاظ بسياق أكبر للتحليل المترابط
+                
+                // 6. 🎯 إعدادات إضافية للجودة
+                presence_penalty: 0.1, // تشجيع التنوع في التحليل
+                frequency_penalty: 0.1 // تجنب تكرار نفس العبارات
             } 
         }, {
-            // وقت كافي جداً للمعالجة الهجينة (20 دقيقة)
-            timeout: 1200000, 
+            timeout: 900000,  // 15 دقيقة - وقت كافي للتقارير المفصلة
             maxContentLength: Infinity,
             maxBodyLength: Infinity
         });
 
         if (response.data && response.data.response) {
-            if (logger) logger.info(`✅ Article Generated Successfully (Hybrid Mode)`);
+            const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+            if (logger) logger.info(`✅ Security Report Generated Successfully (Balanced Mode) in ${duration}s 🎯`);
+            console.log(`🎯 AI Analysis Time: ${duration}s (Quality-Optimized for Security Reports)`);
             
-            // ترويسة التقرير (Header)
             const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Africa/Cairo' });
             
             const reportWithMetadata = `---
 Report Generated: ${timestamp}
 Target: ${targetUrl}
-Analysis Engine: VulnCraft AI (Hybrid Architecture)
+Analysis Engine: VulnCraft AI (Quality-Balanced Architecture)
+Processing Time: ${duration}s
+Report Quality: Professional Security Analysis
 Confidentiality: Internal / Restricted
 ---
 
@@ -82,29 +96,47 @@ ${response.data.response}
         }
 
     } catch (error) {
-        // نفس نظام معالجة الأخطاء العبقري اللي في كودك (سيبته زي ما هو)
         const errMsg = error.message;
         
-        if (errMsg.includes("404")) console.error("❌ Model not found! Run: ollama pull llama3.1");
-        else if (errMsg.includes("timeout")) console.error("⏱️ Timeout! Try reducing num_ctx to 4096.");
-        else if (errMsg.includes("out of memory")) console.error("💾 GPU OOM! Try reducing num_gpu to 15.");
+        if (errMsg.includes("404")) {
+            console.error("❌ Model not found! Run: ollama pull llama3.1:8b-instruct-q4_0");
+        } else if (errMsg.includes("timeout")) {
+            console.error("⏱️ Timeout! Your report might be too complex.");
+            console.error("   Solutions:");
+            console.error("   1. This is normal for 7+ vulnerabilities");
+            console.error("   2. Current timeout: 15 minutes");
+            console.error("   3. Consider splitting large scans");
+        } else if (errMsg.includes("out of memory") || errMsg.includes("CUDA") || errMsg.includes("OOM")) {
+            console.error("💾 GPU Out of Memory! Solutions:");
+            console.error("   1. Change num_gpu from -1 to 25");
+            console.error("   2. Reduce num_ctx to 1536");
+            console.error("   3. Reduce num_batch to 1024");
+            console.error("   4. Close Chrome and other GPU apps");
+            console.error("   5. Run: nvidia-smi to check VRAM usage");
+        }
         
         if (logger && logger.error) logger.error(`AI Service Error: ${errMsg}`);
         else console.error("Full Error:", errMsg);
         
-        // إرجاع رسالة خطأ منسقة في ملف الـ PDF
         return `# Report Generation Failed
 **Target:** ${targetUrl}
-**Error:** AI Processing Error (Hybrid Mode)
+**Error:** AI Processing Error (GPU Turbo Mode)
 **Details:** ${errMsg}
-**Tip:** If OOM occurs, try lowering 'num_gpu' in code.`;
+
+**Speed Optimization Tips:**
+1. Model: llama3.1:8b-instruct-q4_0 ✅
+2. Close all GPU apps (Chrome, games)
+3. Run 'nvidia-smi' to monitor VRAM
+4. Current settings: num_ctx=2048, num_batch=2048
+
+**If OOM occurs:**
+- Edit code: num_gpu: 25 (instead of -1)
+- Reduce: num_ctx: 1536
+- Reduce: num_batch: 1024`;
     }
     };
 
-    // إضافة المهمة للطابور وانتظار النتيجة
     const result = requestQueue.then(currentTask);
-    
-    // تحديث الطابور ليشير إلى المهمة الحالية (مع معالجة الأخطاء لعدم إيقاف الطابور)
     requestQueue = result.catch(() => {});
 
     return result;

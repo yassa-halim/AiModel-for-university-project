@@ -45,6 +45,7 @@ exports.generateAndSavePDF = (markdownContent, targetUrl) => {
             const options = {
                 cssPath: fs.existsSync(cssPath) ? cssPath : null,
                 paperFormat: 'A4',
+                renderDelay: 3000, // 🔥 انتظار 3 ثواني لضمان تحميل المحتوى والتنسيقات
             };
 
             // 5. التوليد

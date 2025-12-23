@@ -240,7 +240,7 @@ exports.generateReportContent = async (targetUrl, cleanedData) => {
           stream: false,
           options: {
             num_ctx: 4096,
-            num_gpu: 8,
+            num_gpu: 11,
             temperature: 0.2,
             top_p: 0.9,
             repeat_penalty: 1.1,

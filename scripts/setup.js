@@ -40,13 +40,21 @@ const setup = async () => {
             console.log("✅ AI Model 'reports' directory checked.");
         }
 
-        console.log("\n⏳ Checking Llama 3.1 Model...");
+        console.log("\n⏳ Checking Llama 3.1 (8B-Instruct-Q4_0) Model...");
         // التحقق أولاً إذا كان الموديل موجوداً لتوفير الوقت
         const listOutput = await runCommand('ollama list', 'Checking installed models');
-        if (listOutput.includes('llama3.1')) {
-            console.log("✅ Model 'llama3.1' is already installed. Skipping download.");
+        if (listOutput.includes('llama3.1:8b-instruct-q4_0')) {
+            console.log("✅ Model 'llama3.1:8b-instruct-q4_0' is already installed. Skipping download.");
         } else {
-            await runCommand('ollama pull llama3.1', 'Pulling AI Model');
+            await runCommand('ollama pull llama3.1:8b-instruct-q4_0', 'Pulling AI Model');
+        }
+
+        // حذف الموديل القديم (llama3.1) لتوفير المساحة إذا كان موجوداً
+        console.log("\n🗑️ Removing old 'llama3.1' generic model...");
+        try {
+            await runCommand('ollama rm llama3.1', 'Deleting old model');
+        } catch (e) {
+            console.log("⚠️ Old model not found or already deleted.");
         }
 
         console.log("\n🎉 Setup Finished! Run 'npm start' to begin.");

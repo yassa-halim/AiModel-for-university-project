@@ -1,5 +1,6 @@
-/* VulnCraft Professional Security Report - Enterprise Edition v2.0 */
-/* Optimized for Executive Readability & PDF Export */
+/* VulnCraft Enterprise Security Report - Professional Edition v3.0 */
+/* Optimized for AI-Generated Reports, Executive Readability & PDF Export */
+/* Complete Version - All Styles Included */
 
 /* ==================== FOUNDATIONAL STYLES ==================== */
 
@@ -11,8 +12,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-    color: #1e293b; /* Slate 800 - Darker for better readability */
-    line-height: 1.7;
+    color: #1e293b;
+    line-height: 1.75;
     padding: 50px 70px;
     background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
     max-width: 1200px;
@@ -25,13 +26,13 @@ body {
 /* ==================== DOCUMENT HEADER ==================== */
 
 h1 {
-    color: #0f172a; /* Slate 900 */
+    color: #0f172a;
     font-size: 28pt;
     font-weight: 800;
-    border-bottom: 3px solid #0f172a;
-    padding-bottom: 15px;
+    border-bottom: 4px solid #0f172a;
+    padding-bottom: 18px;
     margin-top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 55px;
     letter-spacing: -0.8px;
     text-align: left;
     position: relative;
@@ -41,57 +42,65 @@ h1 {
 h1::after {
     content: '';
     position: absolute;
-    bottom: -3px;
+    bottom: -4px;
     left: 0;
-    width: 80px;
-    height: 3px;
+    width: 100px;
+    height: 4px;
     background: linear-gradient(90deg, #dc2626 0%, #ea580c 50%, #d97706 100%);
+    border-radius: 2px;
 }
 
-/* ==================== SECTION HEADERS ==================== */
+/* ==================== SECTION HEADERS (H2) ==================== */
 
 h2 {
-    color: #0f172a; /* Slate 900 */
+    color: #0f172a;
     font-size: 17pt;
     font-weight: 700;
-    margin-top: 45px;
-    margin-bottom: 20px;
-    padding: 12px 0 12px 20px;
-    border-left: 5px solid #3b82f6; /* Blue accent */
-    background: linear-gradient(to right, #eff6ff 0%, transparent 100%);
+    margin-top: 50px;
+    margin-bottom: 22px;
+    padding: 14px 0 14px 22px;
+    border-left: 5px solid #3b82f6;
+    background: linear-gradient(to right, #eff6ff 0%, rgba(239, 246, 255, 0.3) 100%);
     page-break-after: avoid;
     letter-spacing: -0.3px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.08);
 }
 
 h2::before {
     content: '§ ';
     color: #3b82f6;
     font-weight: 800;
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
-/* ==================== SUB-SECTION HEADERS ==================== */
+/* ==================== SUB-SECTION HEADERS (H3) ==================== */
 
 h3 {
-    color: #334155; /* Slate 700 */
+    color: #334155;
     font-size: 13.5pt;
-    font-weight: 600;
-    margin-top: 30px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #cbd5e1;
-    padding-bottom: 6px;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 8px;
     page-break-after: avoid;
+    letter-spacing: -0.2px;
 }
 
+/* ==================== SUB-SUB-SECTION HEADERS (H4) ==================== */
+
 h4 {
-    color: #475569; /* Slate 600 */
-    font-size: 11.5pt;
-    font-weight: 600;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    color: #475569;
+    font-size: 11pt;
+    font-weight: 700;
+    margin-top: 22px;
+    margin-bottom: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     font-size: 9.5pt;
+    padding-left: 12px;
+    border-left: 3px solid #94a3b8;
 }
 
 /* ==================== PROFESSIONAL TABLES ==================== */
@@ -105,12 +114,11 @@ table {
     border: 1px solid #cbd5e1;
     page-break-inside: avoid;
     background-color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
     overflow: hidden;
 }
 
-/* Table Header Styling */
 thead {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: #ffffff;
@@ -124,16 +132,16 @@ th {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 8.5pt;
-    letter-spacing: 1px;
-    padding: 14px 18px;
+    letter-spacing: 1.2px;
+    padding: 16px 20px;
     text-align: left;
-    border-bottom: 2px solid #475569;
+    border-bottom: 3px solid #475569;
     white-space: nowrap;
 }
 
-/* Table Body Styling */
 tbody tr {
     transition: background-color 0.2s ease;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 tbody tr:nth-child(even) {
@@ -144,18 +152,17 @@ tbody tr:hover {
     background-color: #f1f5f9;
 }
 
-td {
-    padding: 12px 18px;
-    border-bottom: 1px solid #e2e8f0;
-    vertical-align: middle;
-    color: #334155;
-}
-
-tbody tr:last-child td {
+tbody tr:last-child {
     border-bottom: none;
 }
 
-/* First column emphasis */
+td {
+    padding: 14px 20px;
+    vertical-align: middle;
+    color: #334155;
+    line-height: 1.6;
+}
+
 td:first-child {
     font-weight: 600;
     color: #1e293b;
@@ -163,99 +170,88 @@ td:first-child {
 
 /* ==================== SEVERITY INDICATORS ==================== */
 
-/* Critical Severity Badge */
-.severity-critical,
-td:contains('🔴'),
-td:contains('Critical'),
-span.critical {
+.severity-critical {
     color: #ffffff !important;
-    font-weight: 700;
+    font-weight: 800;
     background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    padding: 4px 12px;
-    border-radius: 5px;
+    padding: 5px 14px;
+    border-radius: 6px;
     display: inline-block;
     font-size: 8.5pt;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+    letter-spacing: 0.8px;
+    box-shadow: 0 3px 6px rgba(220, 38, 38, 0.35);
+    border: 1px solid #991b1b;
 }
 
-/* High Severity Badge */
-.severity-high,
-td:contains('🟠'),
-td:contains('High'),
-span.high {
+.severity-high {
     color: #ffffff !important;
-    font-weight: 700;
+    font-weight: 800;
     background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
-    padding: 4px 12px;
-    border-radius: 5px;
+    padding: 5px 14px;
+    border-radius: 6px;
     display: inline-block;
     font-size: 8.5pt;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(234, 88, 12, 0.3);
+    letter-spacing: 0.8px;
+    box-shadow: 0 3px 6px rgba(234, 88, 12, 0.35);
+    border: 1px solid #9a3412;
 }
 
-/* Medium Severity Badge */
-.severity-medium,
-td:contains('🟡'),
-td:contains('Medium'),
-span.medium {
+.severity-medium {
     color: #ffffff !important;
-    font-weight: 700;
+    font-weight: 800;
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    padding: 4px 12px;
-    border-radius: 5px;
+    padding: 5px 14px;
+    border-radius: 6px;
     display: inline-block;
     font-size: 8.5pt;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+    letter-spacing: 0.8px;
+    box-shadow: 0 3px 6px rgba(245, 158, 11, 0.35);
+    border: 1px solid #b45309;
 }
 
-/* Low Severity Badge */
-.severity-low,
-td:contains('🟢'),
-td:contains('Low'),
-span.low {
+.severity-low {
     color: #ffffff !important;
-    font-weight: 700;
+    font-weight: 800;
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    padding: 4px 12px;
-    border-radius: 5px;
+    padding: 5px 14px;
+    border-radius: 6px;
     display: inline-block;
     font-size: 8.5pt;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+    letter-spacing: 0.8px;
+    box-shadow: 0 3px 6px rgba(16, 185, 129, 0.35);
+    border: 1px solid #047857;
 }
 
-/* ==================== CODE BLOCKS & TECHNICAL CONTENT ==================== */
+/* ==================== CODE BLOCKS ==================== */
 
 pre {
-    background-color: #0f172a; /* Dark theme for code */
-    border: 1px solid #1e293b;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid #334155;
     border-left: 4px solid #3b82f6;
-    border-radius: 6px;
-    padding: 18px;
+    border-radius: 8px;
+    padding: 20px;
     overflow-x: auto;
     font-family: "SF Mono", "Consolas", "Monaco", "Courier New", monospace;
     font-size: 9pt;
     color: #e2e8f0;
-    margin: 25px 0;
-    line-height: 1.5;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 28px 0;
+    line-height: 1.6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 code {
     font-family: "SF Mono", "Consolas", "Monaco", "Courier New", monospace;
     background-color: #f1f5f9;
-    padding: 3px 6px;
+    padding: 3px 7px;
     border-radius: 4px;
     font-size: 0.92em;
     color: #dc2626;
     border: 1px solid #e2e8f0;
+    font-weight: 600;
 }
 
 pre code {
@@ -263,20 +259,16 @@ pre code {
     padding: 0;
     color: #e2e8f0;
     border: none;
+    font-weight: 400;
 }
 
-/* Syntax highlighting hints */
-pre .keyword { color: #f472b6; }
-pre .string { color: #34d399; }
-pre .comment { color: #64748b; font-style: italic; }
-pre .function { color: #60a5fa; }
-
-/* ==================== TEXT & PARAGRAPH STYLING ==================== */
+/* ==================== TEXT STYLING ==================== */
 
 p {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.3em;
     text-align: justify;
     color: #334155;
+    line-height: 1.75;
 }
 
 strong, b {
@@ -289,76 +281,78 @@ em, i {
     color: #475569;
 }
 
-/* ==================== ALERT BOXES & CALLOUTS ==================== */
+/* ==================== ALERT BOXES ==================== */
 
 blockquote {
     border-left: 5px solid #3b82f6;
-    background: linear-gradient(to right, #eff6ff 0%, #dbeafe 100%);
-    padding: 18px 20px;
-    margin: 25px 0;
+    background: linear-gradient(to right, #eff6ff 0%, #dbeafe 50%, transparent 100%);
+    padding: 20px 24px;
+    margin: 28px 0;
     color: #1e40af;
     font-style: normal;
-    border-radius: 0 6px 6px 0;
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.12);
 }
 
 blockquote::before {
-    content: 'ℹ️ NOTE: ';
-    font-weight: 700;
+    content: 'ℹ️ NOTE';
+    font-weight: 800;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 9pt;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: #1e40af;
 }
 
-/* Warning Box */
 .warning {
     border-left: 5px solid #f59e0b;
-    background: linear-gradient(to right, #fffbeb 0%, #fef3c7 100%);
-    padding: 18px 20px;
-    margin: 25px 0;
+    background: linear-gradient(to right, #fffbeb 0%, #fef3c7 50%, transparent 100%);
+    padding: 20px 24px;
+    margin: 28px 0;
     color: #92400e;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.12);
 }
 
-/* Critical Alert Box */
 .alert-critical {
     border-left: 5px solid #dc2626;
-    background: linear-gradient(to right, #fef2f2 0%, #fee2e2 100%);
-    padding: 18px 20px;
-    margin: 25px 0;
+    background: linear-gradient(to right, #fef2f2 0%, #fee2e2 50%, transparent 100%);
+    padding: 20px 24px;
+    margin: 28px 0;
     color: #991b1b;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 8px 8px 0;
     font-weight: 600;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.12);
 }
 
 /* ==================== LISTS ==================== */
 
 ul, ol {
-    margin: 18px 0;
-    padding-left: 30px;
+    margin: 20px 0;
+    padding-left: 32px;
 }
 
 li {
-    margin-bottom: 8px;
-    padding-left: 8px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     color: #334155;
+    line-height: 1.7;
 }
 
 ul li::marker {
     color: #3b82f6;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 1.1em;
 }
 
 ol li::marker {
     color: #3b82f6;
-    font-weight: bold;
+    font-weight: 800;
 }
 
-/* Nested lists */
 ul ul, ol ul, ul ol, ol ol {
-    margin: 8px 0;
+    margin: 10px 0;
 }
 
 /* ==================== HORIZONTAL RULES ==================== */
@@ -366,7 +360,7 @@ ul ul, ol ul, ul ol, ol ol {
 hr {
     border: 0;
     border-top: 2px solid #e2e8f0;
-    margin: 50px 0;
+    margin: 55px 0;
     height: 0;
     background: none;
     position: relative;
@@ -375,13 +369,13 @@ hr {
 hr::after {
     content: '⬥';
     position: absolute;
-    top: -12px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     background: #ffffff;
-    padding: 0 15px;
+    padding: 0 20px;
     color: #cbd5e1;
-    font-size: 14pt;
+    font-size: 16pt;
 }
 
 /* ==================== DOCUMENT FOOTER ==================== */
@@ -389,23 +383,23 @@ hr::after {
 .report-footer,
 div[align="center"] {
     margin-top: 100px;
-    padding-top: 30px;
-    border-top: 2px solid #cbd5e1;
+    padding: 35px 0;
+    border-top: 3px solid #cbd5e1;
     color: #64748b;
     font-size: 9pt;
     text-align: center;
     background: linear-gradient(to top, #f8fafc 0%, transparent 100%);
-    padding-bottom: 20px;
 }
 
 .report-footer strong,
 div[align="center"] strong {
     color: #0f172a;
-    font-size: 11pt;
-    letter-spacing: 1px;
+    font-size: 12pt;
+    letter-spacing: 2px;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-weight: 800;
 }
 
 .report-footer em,
@@ -413,7 +407,7 @@ div[align="center"] em {
     color: #64748b;
     font-style: italic;
     display: block;
-    margin-top: 5px;
+    margin-top: 8px;
     font-size: 8.5pt;
 }
 
@@ -423,95 +417,112 @@ a {
     color: #3b82f6;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-bottom 0.2s ease;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 a:hover {
-    border-bottom: 1px solid #3b82f6;
+    border-bottom: 2px solid #3b82f6;
+    color: #2563eb;
 }
 
 /* ==================== SPECIAL ELEMENTS ==================== */
 
-/* Status Badges */
 .status-open {
-    background-color: #fef2f2;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     color: #dc2626;
-    padding: 3px 10px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 5px;
     font-size: 8pt;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
+    display: inline-block;
+    border: 1px solid #fca5a5;
+    letter-spacing: 0.5px;
 }
 
 .status-fixed {
-    background-color: #f0fdf4;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     color: #15803d;
-    padding: 3px 10px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 5px;
     font-size: 8pt;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
+    display: inline-block;
+    border: 1px solid #86efac;
+    letter-spacing: 0.5px;
 }
 
-/* Priority Indicators */
 .priority-p0 {
     color: #dc2626;
-    font-weight: 800;
-    font-size: 10pt;
+    font-weight: 900;
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .priority-p1 {
     color: #ea580c;
-    font-weight: 700;
-    font-size: 10pt;
+    font-weight: 800;
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .priority-p2 {
     color: #f59e0b;
-    font-weight: 600;
-    font-size: 10pt;
+    font-weight: 700;
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .priority-p3 {
     color: #10b981;
-    font-weight: 600;
-    font-size: 10pt;
+    font-weight: 700;
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* CVSS Score Display */
 .cvss-score {
     font-family: "SF Mono", "Consolas", monospace;
     background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
     color: #ffffff;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 6px;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 11pt;
     display: inline-block;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    border: 1px solid #475569;
+    letter-spacing: 0.5px;
 }
 
 /* ==================== PRINT OPTIMIZATION ==================== */
 
 @media print {
     body {
-        padding: 20px 30px;
+        padding: 20px 35px;
         font-size: 9pt;
         background: #ffffff;
-        line-height: 1.5;
+        line-height: 1.55;
     }
     
     h1 {
         font-size: 22pt;
         color: #000;
         page-break-after: avoid;
+        border-bottom: 3px solid #000;
     }
     
     h2 {
         font-size: 15pt;
         page-break-after: avoid;
-        background: none;
-        border-left: 3px solid #000;
+        background: #f0f0f0 !important;
+        border-left: 4px solid #000;
+        color: #000;
     }
     
     h2::before {
@@ -521,17 +532,23 @@ a:hover {
     h3 {
         font-size: 12pt;
         page-break-after: avoid;
+        color: #000;
+    }
+    
+    h4 {
+        font-size: 10pt;
+        color: #333;
     }
     
     table {
         page-break-inside: auto;
         box-shadow: none;
-        border: 1px solid #000;
+        border: 2px solid #000;
     }
     
     thead {
         display: table-header-group;
-        background: #f0f0f0 !important;
+        background: #e0e0e0 !important;
         color: #000 !important;
     }
     
@@ -541,10 +558,11 @@ a:hover {
     }
     
     td, th {
-        border: 1px solid #ccc;
+        border: 1px solid #999;
+        padding: 10px 14px;
     }
     
-    pre, blockquote {
+    pre, blockquote, .warning, .alert-critical {
         page-break-inside: avoid;
         border: 1px solid #000;
         background: #f9f9f9 !important;
@@ -552,30 +570,58 @@ a:hover {
     
     pre {
         color: #000 !important;
+        background: #f5f5f5 !important;
+    }
+    
+    pre code {
+        color: #000 !important;
     }
     
     a {
         text-decoration: none;
         color: #000;
+        border-bottom: none;
     }
     
-    a::after {
+    a[href^="http"]::after {
         content: " (" attr(href) ")";
-        font-size: 0.8em;
+        font-size: 0.75em;
         color: #666;
+        font-weight: 400;
     }
     
-    /* Hide decorative elements in print */
     h1::after, hr::after {
         display: none;
     }
     
-    /* Force severity badges to be visible */
     .severity-critical, .severity-high, .severity-medium, .severity-low {
         border: 2px solid #000 !important;
         color: #000 !important;
         background: #fff !important;
-        font-weight: 800 !important;
+        font-weight: 900 !important;
+        padding: 3px 10px !important;
+    }
+    
+    .severity-critical::before { content: '[CRITICAL] '; }
+    .severity-high::before { content: '[HIGH] '; }
+    .severity-medium::before { content: '[MEDIUM] '; }
+    .severity-low::before { content: '[LOW] '; }
+    
+    .cvss-score, .status-open, .status-fixed {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #000 !important;
+    }
+    
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+    
+    h3 + h4,
+    h4 + p,
+    h4 + ul,
+    h4 + table {
+        page-break-before: avoid;
     }
 }
 
@@ -591,4 +637,30 @@ a:hover {
 
 .no-break {
     page-break-inside: avoid;
+}
+
+.keep-together {
+    page-break-inside: avoid;
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.mt-large {
+    margin-top: 40px;
+}
+
+.mb-large {
+    margin-bottom: 40px;
 }
