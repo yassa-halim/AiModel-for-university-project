@@ -20,7 +20,7 @@ exports.generateReportContent = async (targetUrl, cleanedData) => {
         .replace('{{TIMESTAMP}}', Date.now().toString());
 
     try {
-        if (logger) logger.info(`🤖 Generating Professional Security Report (Balanced Mode) for: ${targetUrl}`);
+        if (logger) logger.info(`🤖 Generating Professional Security Report (Maximum Quality Mode) for: ${targetUrl}`);
         const startTime = Date.now();
 
         // حساب تقريبي لحجم الداتا
@@ -32,54 +32,53 @@ exports.generateReportContent = async (targetUrl, cleanedData) => {
             prompt: prompt,
             stream: false,
             
-            // 🎯 إعدادات متوازنة للتحليل الأمني الاحترافي
-            // الهدف: تقرير مفصّل وشامل مع سرعة معقولة
+            // 🎯 إعدادات الجودة القصوى (Maximum Quality & Professionalism)
+            // الهدف: تقرير احترافي جداً بغض النظر عن الوقت (Hybrid Mode)
             options: { 
-                // 1. 📊 الذاكرة (كافية لتحليل ثغرات متعددة)
-                num_ctx: 2048,         // ⚡ مناسبة لتحليل 3-5 ثغرات بتفصيل
+                // 1. 📊 الذاكرة (Context Window)
+                // رفعنا الذاكرة لـ 8192 عشان الموديل يقرأ كل التفاصيل ويكتب تقرير طويل ومترابط
+                num_ctx: 8192,         
                 
-                // 2. 🔥 GPU: توازن بين الأداء والاستقرار
-                num_gpu: 18,           // ⚡ 18 طبقة = جودة عالية مع استقرار
+                // 2. 🔥 GPU + CPU (Hybrid Mode)
+                // كرت الشاشة 4GB لا يكفي للموديل بالكامل (4.7GB).
+                // الحل: نضع 12 طبقة على الكرت (عشان نسيب مساحة للذاكرة) والباقي على المعالج i5-12500 القوي.
+                num_gpu: 12,           
                 
-                // 3. 🎯 إعدادات الجودة (مُحسّنة للتقارير الأمنية)
-                temperature: 0.2,      // منخفضة للدقة والالتزام بالقالب
-                top_p: 0.9,            // نطاق واسع للتعبيرات الفنية
-                top_k: 50,             // توازن بين التنوع والدقة
-                repeat_penalty: 1.2,   // منع التكرار في التحليل
+                // 3. 🎯 إعدادات الجودة (Professional Tone)
+                temperature: 0.1,      // دقة عالية جداً وتقليل التأليف
+                top_p: 0.9,            
+                top_k: 40,             
+                repeat_penalty: 1.1,   // منع التكرار
                 
-                // 4. 📝 حد الكلمات (مرن للتقارير المفصلة)
-                num_thread: 4,         
-                num_predict: 3500,     // ⚡ كافي لتحليل 5-7 ثغرات بتفصيل كامل
+                // 4. 📝 الأداء (CPU Optimization)
+                // المعالج i5-12500 يحتوي على 6 أنوية Performance، نستخدمها كلها
+                num_thread: 6,         
+                num_predict: -1,       // سيبه يكتب براحته لحد ما يخلص الفكرة (Unlimited)
                 
-                // 5. 🔥 إعدادات الأداء المتوازنة
-                num_batch: 512,        // توازن بين السرعة واستهلاك VRAM
+                // 5. 🔥 إعدادات تقنية
+                num_batch: 512,        
                 use_mmap: true,        
-                use_mlock: false,      
-                num_keep: 6,           // الاحتفاظ بسياق أكبر للتحليل المترابط
-                
-                // 6. 🎯 إعدادات إضافية للجودة
-                presence_penalty: 0.1, // تشجيع التنوع في التحليل
-                frequency_penalty: 0.1 // تجنب تكرار نفس العبارات
+                num_keep: 24,          // الاحتفاظ بسياق أكبر لضمان ترابط التقرير
             } 
         }, {
-            timeout: 900000,  // 15 دقيقة - وقت كافي للتقارير المفصلة
+            timeout: 1200000,  // 20 دقيقة - وقت كافي جداً
             maxContentLength: Infinity,
             maxBodyLength: Infinity
         });
 
         if (response.data && response.data.response) {
             const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-            if (logger) logger.info(`✅ Security Report Generated Successfully (Balanced Mode) in ${duration}s 🎯`);
-            console.log(`🎯 AI Analysis Time: ${duration}s (Quality-Optimized for Security Reports)`);
+            if (logger) logger.info(`✅ Security Report Generated Successfully (Max Quality Mode) in ${duration}s 💎`);
+            console.log(`💎 AI Analysis Time: ${duration}s (Professional Hybrid Mode - i5+RTX3050)`);
             
             const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Africa/Cairo' });
             
             const reportWithMetadata = `---
 Report Generated: ${timestamp}
 Target: ${targetUrl}
-Analysis Engine: VulnCraft AI (Quality-Balanced Architecture)
+Analysis Engine: VulnCraft AI (Maximum Quality - Hybrid Architecture)
 Processing Time: ${duration}s
-Report Quality: Professional Security Analysis
+Report Quality: ★★★★★ Professional Security Analysis
 Confidentiality: Internal / Restricted
 ---
 
@@ -120,19 +119,14 @@ ${response.data.response}
         
         return `# Report Generation Failed
 **Target:** ${targetUrl}
-**Error:** AI Processing Error (GPU Turbo Mode)
+**Error:** AI Processing Error (Hybrid Mode)
 **Details:** ${errMsg}
 
-**Speed Optimization Tips:**
+**Troubleshooting Tips:**
 1. Model: llama3.1:8b-instruct-q4_0 ✅
-2. Close all GPU apps (Chrome, games)
-3. Run 'nvidia-smi' to monitor VRAM
-4. Current settings: num_ctx=2048, num_batch=2048
-
-**If OOM occurs:**
-- Edit code: num_gpu: 25 (instead of -1)
-- Reduce: num_ctx: 1536
-- Reduce: num_batch: 1024`;
+2. Check VRAM: 4GB is tight for 8192 context.
+3. Try reducing num_ctx to 4096 if OOM occurs.
+4. Current settings: num_gpu=12 (Hybrid), num_thread=6`;
     }
     };
 
