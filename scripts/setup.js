@@ -1,65 +1,133 @@
 // scripts/setup.js
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-console.log("🚀 Starting Project Setup...");
+console.log('🚀 Starting Project Setup...\n');
 
-const runCommand = (command, message) => {
+/* ===============================
+   🔧 Helpers
+   =============================== */
+
+const runCommand = (cmd, args = [], message) => {
     return new Promise((resolve, reject) => {
-        console.log(`\n👉 ${message}...`);
-        const process = exec(command);
-        let output = '';
-        process.stdout.on('data', (data) => {
-            console.log(data.toString());
-            output += data.toString();
+        console.log(`👉 ${message}...`);
+
+        const child = spawn(cmd, args, {
+            stdio: 'inherit',
+            shell: true
         });
-        process.stderr.on('data', (data) => console.error(data.toString()));
-        process.on('exit', (code) => {
-            if (code === 0) resolve(output);
-            else reject(`❌ Error in ${message}`);
+
+        child.on('error', (err) => {
+            reject(`❌ Failed to run ${cmd}: ${err.message}`);
+        });
+
+        child.on('close', (code) => {
+            if (code === 0) resolve();
+            else reject(`❌ ${cmd} exited with code ${code}`);
         });
     });
 };
 
+const ensureDir = (dirPath, label) => {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        console.log(`✅ ${label} directory created.`);
+    } else {
+        console.log(`✔️ ${label} directory already exists.`);
+    }
+};
+
+const commandExists = (command) => {
+    return new Promise((resolve) => {
+        const check = spawn(command, ['--version'], {
+            stdio: 'ignore',
+            shell: true
+        });
+        check.on('close', (code) => resolve(code === 0));
+    });
+};
+
+/* ===============================
+   🚀 Setup Process
+   =============================== */
+
 const setup = async () => {
     try {
-        await runCommand('npm install', 'Installing Dependencies');
-        
-        // 1. إنشاء مجلد التقارير (حيث يتم حفظ الـ PDF)
-        const pdfDir = path.join(__dirname, '../ai_PDF');
-        if (!fs.existsSync(pdfDir)) {
-            fs.mkdirSync(pdfDir);
-            console.log("✅ 'ai_PDF' directory created.");
-        }
-
-        // 2. التأكد من وجود مجلد الـ CSS
-        const cssDir = path.join(__dirname, '../reports');
-        if (!fs.existsSync(cssDir)) {
-            fs.mkdirSync(cssDir);
-            console.log("✅ AI Model 'reports' directory checked.");
-        }
-
-        console.log("\n⏳ Checking Llama 3.1 (8B-Instruct-Q4_0) Model...");
-        // التحقق أولاً إذا كان الموديل موجوداً لتوفير الوقت
-        const listOutput = await runCommand('ollama list', 'Checking installed models');
-        if (listOutput.includes('llama3.1:8b-instruct-q4_0')) {
-            console.log("✅ Model 'llama3.1:8b-instruct-q4_0' is already installed. Skipping download.");
+        /* ===============================
+           1️⃣ Check Node Dependencies
+           =============================== */
+        if (!fs.existsSync(path.join(__dirname, '../node_modules'))) {
+            await runCommand('npm', ['install'], 'Installing npm dependencies');
         } else {
-            await runCommand('ollama pull llama3.1:8b-instruct-q4_0', 'Pulling AI Model');
+            console.log('✔️ node_modules already installed. Skipping npm install.');
         }
 
-        // حذف الموديل القديم (llama3.1) لتوفير المساحة إذا كان موجوداً
-        console.log("\n🗑️ Removing old 'llama3.1' generic model...");
+        /* ===============================
+           2️⃣ Ensure Required Directories
+           =============================== */
+        ensureDir(path.join(__dirname, '../ai_PDF'), 'ai_PDF');
+        ensureDir(path.join(__dirname, '../reports'), 'reports');
+
+        /* ===============================
+           3️⃣ Check Ollama Availability
+           =============================== */
+        console.log('\n⏳ Checking Ollama installation...');
+        const ollamaInstalled = await commandExists('ollama');
+
+        if (!ollamaInstalled) {
+            throw new Error(
+                'Ollama is not installed or not available in PATH.\n' +
+                '👉 Install from: https://ollama.com'
+            );
+        }
+
+        /* ===============================
+           4️⃣ Ensure Required Model
+           =============================== */
+        console.log('\n🧠 Checking LLaMA 3.1 (8B Instruct Q4_0) model...');
+        const listProcess = spawn('ollama', ['list'], {
+            stdio: 'pipe',
+            shell: true
+        });
+
+        let listOutput = '';
+        listProcess.stdout.on('data', (d) => {
+            listOutput += d.toString();
+        });
+
+        await new Promise((res) => listProcess.on('close', res));
+
+        if (listOutput.includes('llama3.1:8b-instruct-q4_0')) {
+            console.log('✔️ Model already installed. Skipping download.');
+        } else {
+            await runCommand(
+                'ollama',
+                ['pull', 'llama3.1:8b-instruct-q4_0'],
+                'Pulling AI model'
+            );
+        }
+
+        /* ===============================
+           5️⃣ Cleanup Old Model (Soft)
+           =============================== */
+        console.log('\n🧹 Cleaning old generic model (if exists)...');
         try {
-            await runCommand('ollama rm llama3.1', 'Deleting old model');
-        } catch (e) {
-            console.log("⚠️ Old model not found or already deleted.");
+            await runCommand(
+                'ollama',
+                ['rm', 'llama3.1'],
+                'Removing old model'
+            );
+        } catch {
+            console.log('⚠️ Old model not found or already removed.');
         }
 
-        console.log("\n🎉 Setup Finished! Run 'npm start' to begin.");
+        console.log('\n🎉 Setup Completed Successfully!');
+        console.log('👉 Run: npm start');
+
     } catch (error) {
-        console.error("\n💥 Setup Failed:", error);
+        console.error('\n💥 Setup Failed:\n', error);
+        process.exit(1);
     }
 };
 
